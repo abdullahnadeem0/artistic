@@ -5,7 +5,6 @@ export default defineConfig({
   plugins: [react()],
   publicDir: 'public',
   build: {
-    // Ensure assets are properly copied
     assetsDir: 'assets',
     rollupOptions: {
       output: {
@@ -14,9 +13,11 @@ export default defineConfig({
     },
   },
   server: {
-    // Serve static files properly
     fs: {
       strict: false,
     },
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom'],
   },
 });
