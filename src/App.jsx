@@ -1,18 +1,8 @@
 import React, { useEffect } from 'react';
 
-// Import CSS files
-import './css/bootstrap.min.css';
-import './css/slicknav.min.css';
-import './css/swiper-bundle.min.css';
-import './css/all.min.css';
-import './css/animate.css';
-import './css/magnific-popup.css';
-import './css/mousecursor.css';
-import './css/custom.css';
-
 function App() {
   useEffect(() => {
-    // Add Google Fonts dynamically
+    // Add Google Fonts
     const link1 = document.createElement('link');
     link1.rel = 'preconnect';
     link1.href = 'https://fonts.googleapis.com';
@@ -36,33 +26,42 @@ function App() {
     favicon.href = '/images/favicon.png';
     document.head.appendChild(favicon);
 
-    // Define scripts with proper loading order
-    // jQuery MUST load first, then its plugins
+    // Load CSS files from public folder
+    const cssFiles = [
+      '/css/bootstrap.min.css',
+      '/css/slicknav.min.css',
+      '/css/swiper-bundle.min.css',
+      '/css/all.min.css',
+      '/css/animate.css',
+      '/css/magnific-popup.css',
+      '/css/mousecursor.css',
+      '/css/custom.css',
+    ];
+
+    cssFiles.forEach(href => {
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = href;
+      document.head.appendChild(link);
+    });
+
+    // Load JS files with proper order
     const scriptQueue = [
-      // jQuery Core - MUST be first
       { src: '/js/jquery-3.7.1.min.js', key: 'jquery' },
-      
-      // jQuery Plugins (depend on jQuery)
       { src: '/js/jquery.slicknav.js', key: 'slicknav' },
       { src: '/js/jquery.waypoints.min.js', key: 'waypoints' },
       { src: '/js/jquery.counterup.min.js', key: 'counterup' },
       { src: '/js/jquery.magnific-popup.min.js', key: 'magnific' },
       { src: '/js/jquery.mb.YTPlayer.min.js', key: 'ytplayer' },
-      
-      // Other libraries (no jQuery dependency)
       { src: '/js/bootstrap.min.js', key: 'bootstrap' },
       { src: '/js/validator.min.js', key: 'validator' },
       { src: '/js/swiper-bundle.min.js', key: 'swiper' },
       { src: '/js/isotope.min.js', key: 'isotope' },
       { src: '/js/SmoothScroll.js', key: 'smoothscroll' },
       { src: '/js/parallaxie.js', key: 'parallaxie' },
-      
-      // GSAP and plugins
       { src: '/js/gsap.min.js', key: 'gsap' },
       { src: '/js/SplitText.js', key: 'splittext' },
       { src: '/js/ScrollTrigger.min.js', key: 'scrolltrigger' },
-      
-      // Custom scripts (should load last)
       { src: '/js/magiccursor.js', key: 'magiccursor' },
       { src: '/js/wow.min.js', key: 'wow' },
       { src: '/js/function.js', key: 'function' },
